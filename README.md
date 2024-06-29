@@ -25,7 +25,8 @@ The [Fetch Receipt Processor Challenge](https://github.com/fetch-rewards/receipt
 If you have Postman installed, you may use this button below to use the collection I have created to do basic interaction with the service:
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/13928979-6f22523b-9509-4503-b99f-f0ce192a3c22?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D13928979-6f22523b-9509-4503-b99f-f0ce192a3c22%26entityType%3Dcollection%26workspaceId%3D64452a18-21f5-46d9-a5de-751bdc34fe83)
 
-## Curl
+## cURL
+Below are examples of how to call the API endpoints with cURL commands. Do this in a separate tab/window of your terminal/command prompt, not the one you started the server in.
 1. ProcessReceipt Endpoint:
 Example Request:
 ```
