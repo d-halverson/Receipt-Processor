@@ -1,18 +1,24 @@
+# What is this Receipt Processor?
+This Go server implements the [Fetch Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge). You may consume its two endpoints to process receipts, store them in memory, and retrieve how many points each one is worth. For more information on how points are calculated, visit the previous link.
+
 # Steps for Running the Receipt Processor Server:
 *Assumes you already have Go installed on your system.*
 1. Open your terminal / command line
 2. Clone this repo:
-`git clone https://github.com/d-halverson/Receipt-Processor.git`
-3. Change into the directory of the newly cloned repo:
-`cd Receipt-Processor`
-4. Run the program:
-`go run main/main.go`
-
-# What does this Receipt Processor do?
-This Go server implements the [Fetch Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge). You may consume its two endpoints to process receipts, store them in memory, and retrieve how many points each one is worth. For more information on how points are calculated, visit the previous link.
+```
+git clone https://github.com/d-halverson/Receipt-Processor.git
+```
+4. Change into the directory of the newly cloned repo:
+```
+cd Receipt-Processor
+```
+6. Run the program:
+```
+go run main/main.go
+```
 
 # Now that I have the server running, how do I consume this service's apis?
-The above link also contains an overview of the `GET /receipts/{id}/points` and `POST /receipts/process` endpoints, as well as a detailed [api spec](https://github.com/fetch-rewards/receipt-processor-challenge/blob/main/api.yml).
+The [Fetch Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge) link also contains an overview of the `GET /receipts/{id}/points` and `POST /receipts/process` endpoints, as well as a detailed [api spec](https://github.com/fetch-rewards/receipt-processor-challenge/blob/main/api.yml).
 
 ## Postman
 If you have Postman installed, you may use this button below to use the collection I have created to do basic interaction with the service:
@@ -63,3 +69,26 @@ Example Response:
 ```
 {"points":28}
 ```
+
+# Implementation Details and Thoughts
+## Concurrency
+I implemented the `ReceiptStorage` struct with concurrency in mind using locks around reads and writes. Right now, there isn't a huge need for this, because if the API consumers only call GetPoints with a real id they have from a previous call, they know the returned points will always be the same because there will not be any updates to this receipt id in the future (subsequent POSTs of the same receipt will create separate ids). Since this is the case, even without the usage of locks in `ReceiptStorage` the GetPoints API would still have been accurate. I chose to implement it with locks though, because this allows further expansion of features for the service in the future. If there is ever a need to update a receipt's contents or delete a receipt entirely, concurrency would become an absolute _must_.
+
+## Package Structure
+I separated my code into the following packages:
+- main -> Has code to execute the server and start listening for requests
+- handlers -> Contains API handler functions
+- models -> Contains structs for input and output formats of the APIs, and validation of input
+- points -> Logic to calculate points for a receipt
+- storage -> Logic to store receipts in a thread safe manner
+
+Even though some of the packages do not have a lot of code in them, I still chose to follow this structure because it allows for further code to be added on more easily in the future.
+
+## Unit Testing
+I created unit testing on all areas of the service's code, especially extensively on the validation of inputted receipts' formats. To run all unit tests, run this command in the repo's root:
+```
+go test ./...
+```
+
+
+
