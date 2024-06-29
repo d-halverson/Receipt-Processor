@@ -8,14 +8,15 @@ This Go server implements the [Fetch Receipt Processor Challenge](https://github
 ```
 git clone https://github.com/d-halverson/Receipt-Processor.git
 ```
-4. Change into the directory of the newly cloned repo:
+3. Change into the directory of the newly cloned repo:
 ```
 cd Receipt-Processor
 ```
-6. Run the program:
+4. Run the program:
 ```
 go run main/main.go
 ```
+5. To quit, press `control + c` at the same time
 
 # Now that I have the server running, how do I consume this service's apis?
 The [Fetch Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge) link also contains an overview of the `GET /receipts/{id}/points` and `POST /receipts/process` endpoints, as well as a detailed [api spec](https://github.com/fetch-rewards/receipt-processor-challenge/blob/main/api.yml).
