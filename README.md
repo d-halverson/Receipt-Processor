@@ -16,9 +16,9 @@ cd Receipt-Processor
 ```
 go run main/main.go
 ```
-5. To quit, press `control + c` at the same time
+5. To quit, press `control + c` at the same time (do this after you are done calling the APIs in the step below)
 
-# Now that I have the server running, how do I consume this service's apis?
+# Now that I have the server running, how do I consume this service's APIs?
 The [Fetch Receipt Processor Challenge](https://github.com/fetch-rewards/receipt-processor-challenge) link also contains an overview of the `GET /receipts/{id}/points` and `POST /receipts/process` endpoints, as well as a detailed [api spec](https://github.com/fetch-rewards/receipt-processor-challenge/blob/main/api.yml).
 
 ## Postman
