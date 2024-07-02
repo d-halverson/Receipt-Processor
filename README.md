@@ -28,6 +28,7 @@ If you have Postman installed, you may use this button below to use the collecti
 ## cURL
 Below are examples of how to call the API endpoints with cURL commands. Do this in a separate tab/window of your terminal/command prompt, not the one you started the server in.
 1. ProcessReceipt Endpoint:
+
 Example Request:
 ```
 curl --location --request POST 'http://localhost:8080/receipts/process' \
@@ -62,6 +63,7 @@ Example Response:
 {"id":"c163bab9-230f-4555-9e0c-90b33a9841c9"}
 ```
 2. GetPoints Endpoint:
+
 Example Request:
 *Replace {id} with the id returned in the ProcessEndpoint response*
 ```
